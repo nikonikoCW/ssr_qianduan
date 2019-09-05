@@ -35,7 +35,7 @@
       </div>
       <div class="container" style="padding-top:3rem;">
         <div class="row">
-          <div style="height:18rem;text-align:center" class="col-sm-6 col-md-4 col-lg-3" v-for="item in ssr_list" :key='item'>
+          <div style="height:18rem;text-align:center" class="col-sm-6 col-md-4 col-lg-3" v-for="(item, index) in ssr_list" :key='index'>
             <div style="" class="xixi">
               <div style="width:100%;height:12rem;border-radius:0.3rem 0.3rem 0rem 0rem;">
                 <img src="/static/images/123.jpg" alt="" style="width:100%;height:12rem;background:yellow;border-radius:0.3rem 0.3rem 0rem 0rem;">
@@ -68,8 +68,8 @@ export default {
       ssr_list: ['是打发第三方', '12'],
       messge: '123123234234234',
       getImgUrl: 'http://127.0.0.1:8888/api/ssr',
-      after_Decrypt: 'xixisadadasdsasdxix',
-      encode_link: ' '
+      after_Decrypt: '',
+      encode_link: ''
     }
   },
   created () {
@@ -94,9 +94,7 @@ export default {
       })
     },
     decode_link () {
-      debugger
       var that = this
-      console.log(that.encode_link)
       that.after_Decrypt = Base64.decode(that.encode_link)
     }
   }
