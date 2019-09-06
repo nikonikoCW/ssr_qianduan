@@ -7,6 +7,7 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueClipboard from 'vue-clipboard2'
+import store from './store/index'
 import axios from 'axios'
 import qs from 'qs'
 Vue.use(VueClipboard)
@@ -19,6 +20,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store: store,
   components: { App },
   template: '<App/>'
 })

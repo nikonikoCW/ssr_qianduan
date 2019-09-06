@@ -2,7 +2,7 @@
     <div style="width:100%;height:100%;">
         <div class="header">
             <p style="margin-left:2rem;margin-bottom:0px;">萌牛</p>
-            <div class="touxiang"></div>
+            <div class="touxiang" @click="logout"></div>
         </div>
         <div class="content">
             <div class="Side" v-if="true">
@@ -34,6 +34,10 @@ export default {
     gotoRouter (url) {
       console.log(url)
       this.$router.push(url)
+    },
+    logout () {
+      localStorage.removeItem('Authorization')
+      this.$router.push('/login')
     }
   }
 }

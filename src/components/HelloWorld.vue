@@ -67,7 +67,7 @@ export default {
       show_rule_box: false,
       ssr_list: ['是打发第三方', '12'],
       messge: '123123234234234',
-      getImgUrl: 'http://127.0.0.1:8888/api/ssr',
+      getImgUrl: 'http://127.0.0.1:8881/api/ssr',
       after_Decrypt: '',
       encode_link: ''
     }
@@ -88,6 +88,9 @@ export default {
       var url = this.getImgUrl
       _that.ssr_list = []
       axios.get(url).then(function (result) {
+        let token = localStorage.getItem('Authorization')
+        console.log('23')
+        console.log(token)
         for (var i = 0; i < result.data.length; i++) {
           _that.ssr_list.push(result.data[i]['ssr'])
         }

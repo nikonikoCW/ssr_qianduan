@@ -7,7 +7,7 @@ import User from '@/components/User'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   // 加了这个可以去掉#
   mode: 'history',
   routes: [
@@ -36,3 +36,40 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login' || to.path === '/') {
+    next()
+  } else {
+    let token = localStorage.getItem('Authorization')
+    console.log(token)
+    if (token === null || token === '') {
+      console.log('1')
+      next('/login')
+    } else {
+      console.log('2')
+      next()
+    }
+  }
+})
+// router.beforeEach((to, from, next) => {
+//   console.log(to.path)
+//   if (to.path === '/') {
+//     next()
+//   } else {
+//     console.log(to.path)
+//     if (to.path === '/login') {
+//       next()
+//     } else {
+//       let token = localStorage.getItem('Authorization')
+//       console.log(token)
+//       if (token === null || token === '') {
+//         next('/login')
+//       } else {
+//         next()
+//       }
+//     }
+//   }
+// })
+
+export default router

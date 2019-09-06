@@ -3,7 +3,7 @@
         <div style="width:100%;height:4rem;background:red;display:flex;align-items:center;justify-content:flex-end;">
             <div style="margin-right:1rem;">
                 <b-form-input v-model="code" placeholder="请输入你需要搜索的内容" style="width:20rem;height:2.2rem;float:left"></b-form-input>
-                <b-button variant="success" style="width:4rem;height:2.2rem;margin-left:1rem;">添加</b-button>
+                <b-button variant="success" style="width:4rem;height:2.2rem;margin-left:1rem;" @click="get_alluser">添加</b-button>
                 <b-button variant="success" style="width:4rem;height:2.2rem;margin-left:1rem;">删除</b-button>
             </div>
         </div>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -23,12 +24,31 @@ export default {
         { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
         { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson', yinghuochong: 'xixi' },
         { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
-      ]
+      ],
+      code: ''
     }
   },
   created () {
+    this.get_alluser()
   },
   methods: {
+    get_alluser () {
+      var _that = this
+      let token = localStorage.getItem('Authorization')
+      axios.get('http://127.0.0.1:8881/alluser',
+        {
+          headers: {
+            'Authorization': token
+          }
+        }
+      ).then(function (result) {
+        // console.log(result.data)
+        _that.fields = ['age', 'name']
+        _that.items = [{age: 12, name: 'xixi'}]
+        for (var i = 0; i < 4; i++) {
+        }
+      })
+    }
   }
 }
 </script>
