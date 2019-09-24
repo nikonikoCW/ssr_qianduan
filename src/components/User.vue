@@ -8,7 +8,10 @@
             </div>
         </div>
         <div class="userdata">
-            <b-table striped hover :items="items" :fields="fields"></b-table>
+          <div style="width:100%;height:3.5rem;background:black"></div>
+          <div style="width:100%;height:3.5rem;background:white"></div>
+          <div style="width:100%;height:3.5rem;background:black"></div>
+          <div style="width:100%;height:3.5rem;background:white"></div>
         </div>
     </div>
 </template>
@@ -18,13 +21,6 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      fields: [{key: 'age', sortable: true}, 'last_name', 'first_name', 'yinghuochong'],
-      items: [
-        { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-        { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-        { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson', yinghuochong: 'xixi' },
-        { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
-      ],
       code: ''
     }
   },
@@ -33,7 +29,7 @@ export default {
   },
   methods: {
     get_alluser () {
-      var _that = this
+      // var _that = this
       let token = localStorage.getItem('Authorization')
       axios.get('http://127.0.0.1:8881/alluser',
         {
@@ -42,11 +38,7 @@ export default {
           }
         }
       ).then(function (result) {
-        // console.log(result.data)
-        _that.fields = ['age', 'name']
-        _that.items = [{age: 12, name: 'xixi'}]
-        for (var i = 0; i < 4; i++) {
-        }
+        console.log(result.data)
       })
     }
   }
@@ -58,5 +50,8 @@ export default {
     height:calc(100% - 4rem);
     width:100%;
     background: #DDDDDD;
+    padding-top:2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem; 
 }
 </style>

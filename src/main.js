@@ -14,6 +14,8 @@ Vue.use(VueClipboard)
 Vue.use(BootstrapVue)
 Vue.prototype.$ajax = axios
 Vue.prototype.$qs = qs
+//统一管理请求地址和端口后面的axios请求只需要直接跟后缀就行比如 axios.get('api/ssr')
+axios.defaults.baseURL = 'http://47.98.43.2:8080'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

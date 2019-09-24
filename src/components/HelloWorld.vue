@@ -4,12 +4,12 @@
         <span style="margin-left:2rem;font-size:2rem;font-family:Impact;color:#fff;">萌牛</span>
         <div style="" class="d-none d-md-block">
           <b-form-input v-model="code" placeholder="请输入你的兑换码" style="width:20rem;height:2.2rem;float:left"></b-form-input>
-          <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-left:1rem;" @click="show_copy_box=true">兑换</b-button>
+          <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-left:1rem;" @click="show_copy_box">兑换</b-button>
           <span style="margin-left:2rem;font-size:1rem;font-family:Impact;color:#fff;margin-right:2rem;cursor: pointer;margin-top:9rem;" @click="show_rule_box=true">可接受使用政策</span>
-            <b-modal id="modal-center" centered title="兑换牛奶" hide-footer size="md" v-model="show_copy_box">
-              <b-form-textarea size="lg" placeholder="哞哞哞" class="model-textarea"></b-form-textarea>
+            <b-modal id="modal-center" centered title="兑换牛奶" hide-footer size="md" v-model="show_copy_box2">
+              <b-form-textarea size="lg" placeholder="哞哞哞" class="model-textarea" v-model="pc_duihuan_data" style="height:10rem;"></b-form-textarea>
               <div style="width:100%;height:3.5rem;text-align:center;">
-                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;" @click="show_copy_box=false">复制</b-button>
+                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;" @click="show_copy_box">复制</b-button>
               </div>
             </b-modal>
             <b-modal id="modal-center" centered title="可接受使用政策" hide-footer size="md" v-model="show_rule_box">
@@ -27,8 +27,8 @@
               <b-form-textarea placeholder="哞哞哞" class="model-textarea" style="height:10rem;width:100%;" v-model="encode_link"></b-form-textarea>
               <b-form-textarea placeholder="哞哞哞" class="model-textarea2" style="height:10rem;width:100%;margin-top:1.5rem;" readonly="readonly" :value="after_Decrypt"></b-form-textarea>
               <div style="width:100%;height:3.5rem;display:flex;align-items: center;justify-content: space-between;">
-                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;margin-left:1rem;" @click="decode_link">兑换</b-button>
-                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;margin-right:1rem;" @click="show_phone_copy_box=false" v-clipboard:copy="after_Decrypt" v-clipboard:success="onCopy" v-clipboard:error="onError">复制</b-button>
+                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;margin-left:1rem;" @click="decode_link">兑2换</b-button>
+                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;margin-right:1rem;" @click="show_phone_copy_box2" v-clipboard:copy="after_Decrypt" v-clipboard:success="onCopy" v-clipboard:error="onError">复制</b-button>
               </div>
             </b-modal>
         </div>
@@ -38,7 +38,7 @@
           <div style="height:18rem;text-align:center" class="col-sm-6 col-md-4 col-lg-3" v-for="(item, index) in ssr_list" :key='index'>
             <div style="" class="xixi">
               <div style="width:100%;height:12rem;border-radius:0.3rem 0.3rem 0rem 0rem;">
-                <img src="/static/images/123.jpg" alt="" style="width:100%;height:12rem;background:yellow;border-radius:0.3rem 0.3rem 0rem 0rem;">
+                <img src="/static/images/123.jpg" alt="" style="width:100%;height:12rem;border-radius:0.3rem 0.3rem 0rem 0rem;">
               </div>
               <div style="width:100%;height:4.8rem;background:#DDDDDD;border-radius:0rem 0rem 0.3rem 0.3rem;display:flex;align-items: center;justify-content: space-between;">
                 <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-left:1rem;">兑换</b-button>
@@ -62,35 +62,41 @@ export default {
   data () {
     return {
       code: '',
-      show_copy_box: false,
+      show_copy_box2: false,
       show_phone_copy_box: false,
       show_rule_box: false,
       ssr_list: ['是打发第三方', '12'],
       messge: '123123234234234',
-      getImgUrl: 'http://127.0.0.1:8881/api/ssr',
+      getImgUrl: 'http://47.98.43.2:8080/api/ssr',
       after_Decrypt: '',
-      encode_link: ''
+      encode_link: '',
+      pc_duihuan_data: ''
     }
   },
   created () {
     this.getdata()
   },
   methods: {
+    show_phone_copy_box2 () {
+      this.show_phone_copy_box = !this.show_phone_copy_box
+      this.encode_link = ''
+      this.after_Decrypt = ''
+    },
+    show_copy_box () {
+      this.show_copy_box2=!this.show_copy_box2
+      this.pc_duihuan_data = Base64.decode(this.code)
+      this.code = ''
+    },
     onCopy (e) {
-      this.$messge.success('内容已复制到剪切板')
-      alert('123')
     },
     onError (e) {
-      this.$messge.error('抱歉，复制失败！')
     },
     getdata: function () {
       var _that = this
-      var url = this.getImgUrl
+      //var url = this.getImgUrl
       _that.ssr_list = []
-      axios.get(url).then(function (result) {
+      axios.get('api/ssr').then(function (result) {
         let token = localStorage.getItem('Authorization')
-        console.log('23')
-        console.log(token)
         for (var i = 0; i < result.data.length; i++) {
           _that.ssr_list.push(result.data[i]['ssr'])
         }

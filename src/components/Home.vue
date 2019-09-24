@@ -9,7 +9,7 @@
                 <div @click="gotoRouter({path:`/home/user`})" class="side-site">
                     <i style="color:white">用户</i>
                 </div>
-                <div class="side-site">
+                <div class="side-site" @click="gotoRouter({path:`/home/ssr`})" >
                     <i style="color:white">SSR</i>
                 </div>
             </div>
