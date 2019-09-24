@@ -6,6 +6,7 @@ import Home from '@/components/Home'
 import User from '@/components/User'
 import SSR from '@/components/SSR'
 import test from '@/components/test'
+import Ip from '@/components/Ip'
 
 Vue.use(Router)
 
@@ -44,6 +45,12 @@ const router = new Router({
           path: 'ssr',
           name: 'SSR',
           component: SSR
+        },
+        {
+          // 子域名不能/user会直接到根域名
+          path: 'ip',
+          name: 'Ip',
+          component: Ip
         }
       ]
     }

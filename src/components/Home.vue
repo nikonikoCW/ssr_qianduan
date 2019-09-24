@@ -12,6 +12,9 @@
                 <div class="side-site" @click="gotoRouter({path:`/home/ssr`})" >
                     <i style="color:white">SSR</i>
                 </div>
+                <div class="side-site" @click="gotoRouter({path:`/home/ip`})" >
+                    <i style="color:white">Ip记录</i>
+                </div>
             </div>
             <div class="neirong">
                 <router-view></router-view>

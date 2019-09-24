@@ -1,25 +1,22 @@
 <template>
-    <div style="width:100%;height:100%;" class="box">
-        <div style="width:100%;height:4rem;background:#888888;display:flex;align-items:center;justify-content:flex-end;">
-            <div style="margin-right:1rem;">
-                <b-form-input v-model="code" placeholder="请输入你需要搜索的内容" style="width:20rem;height:2.2rem;float:left"></b-form-input>
-                <b-button variant="success" style="width:4rem;height:2.2rem;margin-left:1rem;">添加</b-button>
-                <b-button variant="success" style="width:4rem;height:2.2rem;margin-left:1rem;">删除</b-button>
-            </div>
+    <div style="width:100%;height:100%;padding:4rem;" class="box">
+      <div style="width:100%;height:100%;">
+        <div style="width:100%;height:10%;display:flex;justify-content:flex-end;align-items:center">
+          <b-form-input v-model="code" placeholder="请输入你需要搜索的内容" style="width:20rem;height:2.2rem;float:left"></b-form-input>
+          <b-button variant="success" style="width:4rem;height:2.2rem;margin-left:1rem;">添加</b-button>
+          <b-button variant="success" style="width:4rem;height:2.2rem;margin-left:1rem;">删除</b-button>
         </div>
-        <div class="userdata">
-            <b-table striped hover :items="items" :fields="fields" :per-page="5" :current-page="currentPage" responsive="sm">
+        <div style="width:100%;height:80%;">
+          <b-table hover :items="items" :fields="fields" :per-page="every_page" :current-page="currentPage" responsive id="my-table" sticky-header="600px">
                 <template v-slot:cell(index)="data">
                   {{ 2 + 1 }}
                 </template>
             </b-table>
-            <b-pagination
-            v-model="currentPage"
-            :total-rows="data_number"
-            :per-page="every_page"
-            aria-controls="my-table"
-            ></b-pagination>
         </div>
+        <div style="width:100%;height:10%;display:flex;justify-content:center;padding-top:2rem;">
+          <b-pagination v-model="currentPage" :total-rows="data_number" :per-page="every_page" aria-controls="my-table" ></b-pagination>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -29,16 +26,16 @@ export default {
   data () {
     return {
       //   总共条数
-      data_number: 17,
       //   每页多少条
-      every_page: 5,
+      every_page: 6,
       currentPage: 1,
-      fields: [{ key: 'index', label: 'Index' }, 'SSR', 'miaoshu', 'create', 'ID'],
+      data_number: 21,
+      fields: [ {key:'ID',lable:'ID',stickyColumn: true},'miaoshu', 'create', 'SSR'],
       items: [
-        { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-        { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-        { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson', yinghuochong: 'xixi' },
-        { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
+        { SSR: 40, miaoshu: 'Dickerson', create: 'Macdonald' },
+        { SSR: 21, miaoshu: 'Larsen', create: 'Shaw' },
+        { SSR: 89, miaoshu: 'Gen2333423423423啊速度很快啊速度很快受到法律和了eva', create: 'Wilson', ID: 'xi222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222xi' },
+        { SSR: 38, miaoshu: 'Jami', create: 'Carney' }
       ],
       code: ''
     }
@@ -50,21 +47,25 @@ export default {
     get_alluser () {
       var _that = this
       let token = localStorage.getItem('Authorization')
-      axios.get('http://127.0.0.1:8881/api/ssr',
+      axios.get('http://47.98.43.2:8080/api/ssr',
         {
           headers: {
             'Authorization': token
           }
         }
       ).then(function (result) {
-        console.log(result.data.length)
+        // console.log(result.data.length)
         _that.items = []
         for (var i = 0; i < result.data.length; i++) {
         //   console.log(result.data[i])
           _that.items.push({'SSR': result.data[i]['ssr'], 'miaoshu': result.data[i]['miaoshu'], 'create': result.data[i]['create_time'], 'ID': result.data[i]['_id']})
         }
+        _that.data_number=_that.items.length
       })
     }
+  },
+  computed: {
+    
   }
 }
 </script>
