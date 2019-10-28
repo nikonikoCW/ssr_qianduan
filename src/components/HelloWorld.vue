@@ -9,7 +9,7 @@
             <b-modal id="modal-center" centered title="兑换牛奶" hide-footer size="md" v-model="show_copy_box2">
               <b-form-textarea size="lg" placeholder="哞哞哞" class="model-textarea" v-model="pc_duihuan_data" style="height:10rem;"></b-form-textarea>
               <div style="width:100%;height:3.5rem;text-align:center;">
-                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;" @click="show_copy_box">复制</b-button>
+                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;"  v-clipboard:copy="pc_duihuan_data" v-clipboard:success="onCopy" v-clipboard:error="onError" @click="show_copy_box2=false">复制</b-button>
               </div>
             </b-modal>
             <b-modal id="modal-center" centered title="可接受使用政策" hide-footer size="md" v-model="show_rule_box">
@@ -27,10 +27,10 @@
               <b-form-textarea placeholder="哞哞哞" class="model-textarea" style="height:10rem;width:100%;" v-model="encode_link"></b-form-textarea>
               <b-form-textarea placeholder="哞哞哞" class="model-textarea2" style="height:10rem;width:100%;margin-top:1.5rem;" readonly="readonly" :value="after_Decrypt"></b-form-textarea>
               <div style="width:100%;height:3.5rem;display:flex;align-items: center;justify-content: space-between;">
-                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;margin-left:1rem;" @click="decode_link">兑2换</b-button>
-                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;margin-right:1rem;" @click="show_phone_copy_box2" v-clipboard:copy="after_Decrypt" v-clipboard:success="onCopy" v-clipboard:error="onError">复制</b-button>
+                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;margin-left:1rem;" @click="decode_link">兑换</b-button>
+                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;margin-right:1rem;" @click="show_phone_copy_box=false" v-clipboard:copy="after_Decrypt" v-clipboard:success="onCopy" v-clipboard:error="onError">复制</b-button>
               </div>
-            </b-modal>
+          </b-modal>
         </div>
       </div>
       <div class="container" style="padding-top:3rem;">
@@ -41,11 +41,21 @@
                 <img src="/static/images/123.jpg" alt="" style="width:100%;height:12rem;border-radius:0.3rem 0.3rem 0rem 0rem;">
               </div>
               <div style="width:100%;height:4.8rem;background:#DDDDDD;border-radius:0rem 0rem 0.3rem 0.3rem;display:flex;align-items: center;justify-content: space-between;">
-                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-left:1rem;">兑换</b-button>
+                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-left:1rem;" @click="jiadeduihuan=!jiadeduihuan">兑换</b-button>
+                  
                 <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-right:1rem;" class="copy-btn" v-clipboard:copy="item" v-clipboard:success="onCopy" v-clipboard:error="onError">复制</b-button>
               </div>
             </div>
           </div>
+          <b-modal id="jiadeduihuan_modal" centered title="可接受使用政策" hide-footer size="md" v-model="jiadeduihuan">
+                    <div style="wdith:100%;height:24rem;">
+                      <p style="font-size:2rem;color:clack;">萌牛仅接受遵守中国以及节点所在地区法律和法规的使用行为。 因此，这些免费加速节点严禁用于任何非法目的。 </p>
+                      <p style="font-size:2rem;color:red;">请用最顶部的兑换</p>
+                    </div>
+                    <div style="width:100%;height:3.5rem;text-align:center;">
+                      <b-button variant="outline-primary" style="width:10rem;height:2.2rem;margin-top:1rem;" @click="jiadeduihuan=false">我承诺遵守规则</b-button>
+                    </div>
+                  </b-modal>
         </div>
       </div>
       <div style="width:10rem;position:fixed;bottom:0;left:1rem;z-index:2;" class="d-none d-md-block">
@@ -70,7 +80,9 @@ export default {
       getImgUrl: 'http://47.98.43.2:8080/api/ssr',
       after_Decrypt: '',
       encode_link: '',
-      pc_duihuan_data: ''
+      pc_duihuan_data: '',
+      test:"asdasdasdasdada",
+      jiadeduihuan:false
     }
   },
   created () {
@@ -79,10 +91,12 @@ export default {
   methods: {
     show_phone_copy_box2 () {
       this.show_phone_copy_box = !this.show_phone_copy_box
+      console.log(this.after_Decrypt)
       this.encode_link = ''
       this.after_Decrypt = ''
     },
     show_copy_box () {
+      console.log(this.test,this.pc_duihuan_data)
       this.show_copy_box2=!this.show_copy_box2
       this.pc_duihuan_data = Base64.decode(this.code)
       this.code = ''
@@ -104,12 +118,18 @@ export default {
     },
     decode_link () {
       var that = this
+      console.log(that.encode_link)
       that.after_Decrypt = Base64.decode(that.encode_link)
+      console.log(that.after_Decrypt)
     }
   }
 }
 </script>
 
+<style>
+
+
+</style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .model-textarea{

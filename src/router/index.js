@@ -57,20 +57,20 @@ const router = new Router({
   ]
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/login' || to.path === '/') {
-//     next()
-//   } else {
-//     let token = localStorage.getItem('Authorization')
-//     console.log(token)
-//     if (token === null || token === '') {
-//       console.log('1')
-//       next('/login')
-//     } else {
-//       console.log('2')
-//       next()
-//     }
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login' || to.path === '/') {
+    next()
+  } else {
+    let token = localStorage.getItem('Authorization')
+    console.log(token)
+    if (token === null || token === '') {
+      console.log('1')
+      next('/login')
+    } else {
+      console.log('2')
+      next()
+    }
+  }
+})
 
 export default router

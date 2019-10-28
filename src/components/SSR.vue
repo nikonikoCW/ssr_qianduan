@@ -27,7 +27,7 @@ export default {
     return {
       //   总共条数
       //   每页多少条
-      every_page: 6,
+      every_page: 10,
       currentPage: 1,
       data_number: 21,
       fields: [ {key:'ID',lable:'ID',stickyColumn: true},'miaoshu', 'create', 'SSR'],

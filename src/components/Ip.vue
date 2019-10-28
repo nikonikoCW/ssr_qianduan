@@ -25,7 +25,7 @@ export default {
     return {
         currentPage:1,
         perPage:10,
-        fields: ['IP', 'access_time', 'user_agent'],
+        fields: [{key:'IP',lable:'IP',stickyColumn: true}, 'access_time', 'user_agent'],
         items: [
         ],
         selected: [],
@@ -34,7 +34,7 @@ export default {
     }
   },
   created () {
-    //this.get_allIP()
+    this.get_allIP()
   },
   methods: {
       get_time () {
@@ -75,6 +75,7 @@ export default {
         })
       },
       get_allIP () {
+        //默认获取昨天0点到今天24点内两天的ip数据
         var _that = this
         let time_range = _that.get_time()
         //console.log(time_range)
@@ -115,6 +116,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+.table th, .table td{
+	white-space:nowrap !important;
+	overflow:hidden !important;
+	word-break:keep-all !important;
+}
 </style>
