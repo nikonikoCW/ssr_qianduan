@@ -28,7 +28,7 @@
               <b-form-textarea placeholder="哞哞哞" class="model-textarea2" style="height:10rem;width:100%;margin-top:1.5rem;" readonly="readonly" :value="after_Decrypt"></b-form-textarea>
               <div style="width:100%;height:3.5rem;display:flex;align-items: center;justify-content: space-between;">
                 <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;margin-left:1rem;" @click="decode_link">兑换</b-button>
-                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;margin-right:1rem;" @click="show_phone_copy_box=false" v-clipboard:copy="after_Decrypt" v-clipboard:success="onCopy" v-clipboard:error="onError">复制</b-button>
+                <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-top:1rem;margin-right:1rem;" @click="show_phone_copy_box=false" v-clipboard:copy="after_Decrypt" v-clipboard:success="onCopy" v-clipboard:error="onError">复2制</b-button>
               </div>
           </b-modal>
         </div>
@@ -102,6 +102,8 @@ export default {
       this.code = ''
     },
     onCopy (e) {
+      this.encode_link = ''
+      this.after_Decrypt = ''
     },
     onError (e) {
     },
