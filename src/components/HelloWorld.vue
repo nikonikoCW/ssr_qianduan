@@ -37,8 +37,9 @@
         <div class="row">
           <div style="height:18rem;text-align:center" class="col-sm-6 col-md-4 col-lg-3" v-for="(item, index) in ssr_list" :key='index'>
             <div style="" class="xixi">
-              <div style="width:100%;height:12rem;border-radius:0.3rem 0.3rem 0rem 0rem;">
-                <img src="/static/images/123.jpg" alt="" style="width:100%;height:12rem;border-radius:0.3rem 0.3rem 0rem 0rem;">
+              <div style="width:100%;height:12rem;border-radius:0.3rem 0.3rem 0rem 0rem;position:relative">
+                <img src="/static/images/aliyun.png" alt="" style="width:100%;height:12rem;border-radius:0.3rem 0.3rem 0rem 0rem;" @click="go_my_link">
+                <div style="position:absolute;bottom:-20px;left:9px"><span style="color:black">点击图片，买服务器，超值</span></div>
               </div>
               <div style="width:100%;height:4.8rem;background:#DDDDDD;border-radius:0rem 0rem 0.3rem 0.3rem;display:flex;align-items: center;justify-content: space-between;">
                 <b-button variant="outline-primary" style="width:5rem;height:2.2rem;margin-left:1rem;" @click="jiadeduihuan=!jiadeduihuan">兑换</b-button>
@@ -77,7 +78,6 @@ export default {
       show_rule_box: false,
       ssr_list: ['是打发第三方', '12'],
       messge: '123123234234234',
-      getImgUrl: 'http://47.98.43.2:8080/api/ssr',
       after_Decrypt: '',
       encode_link: '',
       pc_duihuan_data: '',
@@ -89,6 +89,9 @@ export default {
     this.getdata()
   },
   methods: {
+    go_my_link() {
+      window.location.href = 'https://www.aliyun.com/1111/2019/group-buying-share?ptCode=7853A7BB0C1152D2F2ED8CA164CC84C7647C88CF896EF535&userCode=mg7fynjg&share_source=copy_link'
+    },
     show_phone_copy_box2 () {
       this.show_phone_copy_box = !this.show_phone_copy_box
       console.log(this.after_Decrypt)
@@ -109,7 +112,6 @@ export default {
     },
     getdata: function () {
       var _that = this
-      //var url = this.getImgUrl
       _that.ssr_list = []
       axios.get('api/ssr').then(function (result) {
         let token = localStorage.getItem('Authorization')
