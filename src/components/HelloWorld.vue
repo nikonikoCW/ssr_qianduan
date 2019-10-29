@@ -38,7 +38,7 @@
           <div style="height:18rem;text-align:center" class="col-sm-6 col-md-4 col-lg-3" v-for="(item, index) in ssr_list" :key='index'>
             <div style="" class="xixi">
               <div style="width:100%;height:12rem;border-radius:0.3rem 0.3rem 0rem 0rem;position:relative">
-                <img src="/static/images/aliyun.png" alt="" style="width:100%;height:12rem;border-radius:0.3rem 0.3rem 0rem 0rem;" @click="go_my_link">
+                <img src="/static/images/aliyun.png" alt="" style="width:100%;height:12rem;border-radius:0.3rem 0.3rem 0rem 0rem;cursor:pointer" @click="go_my_link">
                 <div style="position:absolute;bottom:-20px;left:9px"><span style="color:black">点击图片，买服务器，超值</span></div>
               </div>
               <div style="width:100%;height:4.8rem;background:#DDDDDD;border-radius:0rem 0rem 0.3rem 0.3rem;display:flex;align-items: center;justify-content: space-between;">
