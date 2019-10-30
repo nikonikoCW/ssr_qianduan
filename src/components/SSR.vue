@@ -34,7 +34,7 @@ export default {
       items: [
         { SSR: 40, miaoshu: 'Dickerson', create: 'Macdonald' },
         { SSR: 21, miaoshu: 'Larsen', create: 'Shaw' },
-        { SSR: 89, miaoshu: 'Gen2333423423423啊速度很快啊速度很快受到法律和了eva', create: 'Wilson', ID: 'xi222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222xi' },
+        { SSR: 89, miaoshu: '到法律和了eva', create: 'Wilson', ID: '22222222222xi' },
         { SSR: 38, miaoshu: 'Jami', create: 'Carney' }
       ],
       code: ''
@@ -47,7 +47,7 @@ export default {
     get_alluser () {
       var _that = this
       let token = localStorage.getItem('Authorization')
-      axios.get('http://47.98.43.2:8080/api/ssr',
+      axios.get('api/ssr',
         {
           headers: {
             'Authorization': token

@@ -40,10 +40,10 @@ export default {
       var _that = this
       // let data = {'username': _that.useranme_input, 'password': _that.password_input}
       let data = {'username': 'niconico2', 'password': 'niconico2'}
-      axios.post('http://127.0.0.1:8881/login', data).then(function (result) {
+      axios.post('login', data).then(function (result) {
         _that.userToken = 'Bearer ' + result.data.token
         _that.changeLogin({ Authorization: _that.userToken })
-        _that.$router.push('/home')
+        _that.$router.push('/home/user')
       })
     }
   }

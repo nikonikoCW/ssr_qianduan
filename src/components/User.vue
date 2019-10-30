@@ -56,7 +56,7 @@ export default {
     get_alluser () {
       var _that = this
       let token = localStorage.getItem('Authorization')
-      axios.get('http://127.0.0.1:8881/alluser',
+      axios.get('alluser',
         {
           headers: {
             'Authorization': token

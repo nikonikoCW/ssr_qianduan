@@ -59,7 +59,7 @@ export default {
           var T2 = date2.getTime();
           let time_range = {'start_time':T1,'end_time':T2}
           let token = localStorage.getItem('Authorization')
-          axios.post('http://127.0.0.1:8881/api/ip',time_range,
+          axios.post('api/ip',time_range,
             {
                 headers: {
                     'Authorization': token
@@ -81,7 +81,7 @@ export default {
         //console.log(time_range)
         let token = localStorage.getItem('Authorization')
         let post_data = {'start_time':time_range.start_time,'end_time':time_range.end_time}
-        axios.post('http://127.0.0.1:8881/api/ip',post_data,
+        axios.post('api/ip',post_data,
             {
                 headers: {
                     'Authorization': token
@@ -101,7 +101,7 @@ export default {
       },
       ban_ip () {
           for (let i in this.selected) {
-              console.log(this.selected[i].first_name)
+              console.log(this.selected[i].IP)
           }
       },
       clearSelected() {
