@@ -7,6 +7,7 @@ import User from '@/components/User'
 import SSR from '@/components/SSR'
 import test from '@/components/test'
 import Ip from '@/components/Ip'
+import BanIp from '@/components/BanIp'
 
 Vue.use(Router)
 
@@ -51,6 +52,12 @@ const router = new Router({
           path: 'ip',
           name: 'Ip',
           component: Ip
+        },
+        {
+          // 子域名不能/user会直接到根域名
+          path: 'banip',
+          name: 'BanIp',
+          component: BanIp
         }
       ]
     }

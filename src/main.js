@@ -16,7 +16,8 @@ Vue.prototype.$ajax = axios
 Vue.prototype.$qs = qs
 //统一管理请求地址和端口后面的axios请求只需要直接跟后缀就行比如 axios.get('api/ssr')
 // axios.defaults.baseURL = 'http://47.98.43.2:8080'
-axios.defaults.baseURL = 'http://www.awslcc.tk'
+// axios.defaults.baseURL = 'http://www.awslcc.tk'
+axios.defaults.baseURL = 'http://127.0.0.1:8881'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

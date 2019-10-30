@@ -100,9 +100,21 @@ export default {
         this.selected = items
       },
       ban_ip () {
+          const ban_ip_list = []
+          const ban_ip_map = {'ip':ban_ip_list}
           for (let i in this.selected) {
-              console.log(this.selected[i].IP)
+              ban_ip_list.push(this.selected[i].IP)
           }
+          let token = localStorage.getItem('Authorization')
+          axios.post('api/banip',ban_ip_map,
+            {
+                headers: {
+                    'Authorization': token
+                }
+            }
+        ).then(function (result) {
+            console.log(result)
+        })
       },
       clearSelected() {
         this.$refs.selectableTable.clearSelected()
